@@ -1,0 +1,27 @@
+
+Git plugin
+https://adamcod.es/2013/07/12/how-to-create-git-plugin.html
+
+git hooks
+https://git-scm.com/book/gr/v2/Customizing-Git-Git-Hooks
+
+ini style configs
+https://docs.python.org/2/library/configparser.html
+
+new style classes
+https://wiki.python.org/moin/NewClassVsClassicClass
+
+
+gitconfigparser
+https://github.com/russianidiot/GitConfigParser.py
+
+
+
+
+flow
+
+1. pre-commit hook
+
+    1.1 read local config
+    1.2 if not user.name and user.email set, break and ask to set account
+
