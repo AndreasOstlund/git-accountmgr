@@ -16,6 +16,10 @@ gitconfigparser
 https://github.com/russianidiot/GitConfigParser.py
 
 
+create a global commit hook
+https://coderwall.com/p/jp7d5q/create-a-global-git-commit-hook
+
+
 
 
 flow
@@ -24,4 +28,21 @@ flow
 
     1.1 read local config
     1.2 if not user.name and user.email set, break and ask to set account
+
+
+
+setup
+
+check git config --global init.templatedir
+if not exist or pointed directory does not exist
+    create dir
+    install hook into dir
+    set setting git config --global init.templatedir <directory>
+
+
+cd ~
+mkdir ~/.git_template
+git config --global init.templatedir ~/.git_template
+ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-commit
+
 
