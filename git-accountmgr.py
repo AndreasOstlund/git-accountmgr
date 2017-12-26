@@ -5,7 +5,7 @@ import ConfigParser
 import subprocess
 import sys
 import os
-
+import argparse
 
 
 class GitConfig(object):
@@ -47,17 +47,68 @@ class GitConfig(object):
 
 
 '''
-cmdparser = argparse.ArgumentParser(description='...')
-    cmdparser.add_argument('add', nargs="?", help='Adds an account')
-    cmdparser.add_argument('change', nargs="?", help='Chages account setting')
-    cmdparser.add_argument('set', nargs="?", help='Sets the account to use')
+    cmdparser = argparse.ArgumentParser(description='Add host to OLL virt-who config')
+    cmdparser.add_argument('config', help='Full path to config file')
+    cmdparser.add_argument('hostname', help='FQDN of the server to add')
+    cmdparser.add_argument('uuid', help='uuid of the server to add')
+    cmdparser.add_argument('environment', help='which environment to add the server to. PROD or TEST')
+    cmdparser.add_argument('comment', nargs="?", help='optional comment to add to the json data. This parameter needs to be specified last. To use spaces add string in quotes')
+
+    cmdargs = cmdparser.parse_args()
+'''
+
+def git_cmd_accountmgr_add():
+    cmdparser = argparse.ArgumentParser(description='...')
+    cmdparser.add_argument('user.name','-u', type=str, help='...', required=True)
+    cmdparser.add_argument('user.email','-e', type=str, help='...', required=True)
 
     cmdargs = cmdparser.parse_args()
 
-'''
+def git_cmd_accountmgr_change():
+    pass
+
+def git_cmd_accountmgr_set():
+    pass
 
 
-def main(argv):
+def git_cmd_accountmgr_main():
+    
+    if len(sys.argv) > 0:
+        cmd = sys.argv[1].lower()
+
+        if cmd == "add":
+            git_cmd_accountmgr_add()
+        elif cmd == "change":
+            git_cmd_accountmgr_change()
+        elif cmd == "set":
+            git_cmd_accountmgr_set()
+        else:
+            print "error"
+    else:
+        print "error"
+
+
+
+def git_hook_pre_commit():
+
+    gitconf = GitConfig()
+    gitconf.get_local_user_config()
+
+    print gitconf.username
+    print gitconf.useremail
+
+    if gitconf.username and gitconf.useremail:
+        sys.exit(os.EX_OK)
+    else:
+        print "No account specified "
+        sys.exit(os.EX_NOPERM)
+
+
+
+def main():
+
+    argv = sys.argv
+
     print len(argv)
     print argv
     print os.path.basename(argv[0])
@@ -65,24 +116,13 @@ def main(argv):
     called_as = os.path.basename(argv[0]).lower()
 
     if called_as == 'git-accountmgr':
-        pass
+        git_cmd_accountmgr_main()
     elif called_as == 'pre-commit':
-        pass
+        git_hook_pre_commit()
 
-        gitconf = GitConfig()
-        gitconf.get_local_user_config()
-
-        print gitconf.username
-        print gitconf.useremail
-
-        if gitconf.username and gitconf.useremail:
-            sys.exit(os.EX_OK)
-        else:
-            print "No account specified "
-            sys.exit(os.EX_NOPERM)
 
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    main()
 

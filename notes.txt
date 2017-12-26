@@ -19,7 +19,9 @@ https://github.com/russianidiot/GitConfigParser.py
 create a global commit hook
 https://coderwall.com/p/jp7d5q/create-a-global-git-commit-hook
 
-
+argparse sub commands
+https://chase-seibert.github.io/blog/2014/03/21/python-multilevel-argparse.html
+https://stackoverflow.com/questions/10448200/how-to-parse-multiple-sub-commands-using-python-argparse
 
 
 flow
