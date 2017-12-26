@@ -43,8 +43,9 @@ if not exist or pointed directory does not exist
 
 
 cd ~
-mkdir ~/.git_template
+mkdir -p  ~/.git_template/hooks
 git config --global init.templatedir ~/.git_template
 ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-commit
+ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-push
 
 

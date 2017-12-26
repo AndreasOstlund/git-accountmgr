@@ -104,6 +104,10 @@ def git_hook_pre_commit():
         sys.exit(os.EX_NOPERM)
 
 
+def git_hook_pre_push():
+    pass
+
+
 
 def main():
 
@@ -119,6 +123,8 @@ def main():
         git_cmd_accountmgr_main()
     elif called_as == 'pre-commit':
         git_hook_pre_commit()
+    elif called_as == 'pre-push':
+        git_hook_pre_push()
 
 
 
