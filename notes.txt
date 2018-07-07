@@ -39,13 +39,10 @@ check git config --global init.templatedir
 if not exist or pointed directory does not exist
     create dir
     install hook into dir
+        cd ~
+        mkdir -p  ~/.git_template/hooks
+        git config --global init.templatedir ~/.git_template
+        chmod +x ~/code/git-accountmgr/git-accountmgr.py
+        ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-commit
+        ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-push
     set setting git config --global init.templatedir <directory>
-
-
-cd ~
-mkdir -p  ~/.git_template/hooks
-git config --global init.templatedir ~/.git_template
-ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-commit
-ln -s ~/code/git-accountmgr/git-accountmgr.py  ~/.git_template/hooks/pre-push
-
-
